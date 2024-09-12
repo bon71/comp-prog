@@ -84,15 +84,13 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
         res = 0
-        irregular = {
+        roman = {
             'IV' : 4,
             'IX' : 9,
             'XL' : 40,
             'XC' : 90,
             'CD' : 400,
-            'CM' : 900
-        }
-        regular = {
+            'CM' : 900,
             'I' : 1,
             'V' : 5,
             'X' : 10,
@@ -101,15 +99,10 @@ class Solution:
             'D' : 500,
             'M' : 1000
         }
-        for k, v in irregular.items():
-            if s.find(k) != -1:
-                res += v
-                s = s.replace(k, '')
-                print(s,k,v)
-        for k, v in regular.items():
+        for k,v in roman.items():
             if s.find(k) != -1:
                 res += v * s.count(k)
-                pass
+                s = s.replace(k,'')
         return res
 # @lc code=end
 
