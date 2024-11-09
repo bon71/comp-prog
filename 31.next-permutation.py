@@ -75,25 +75,23 @@
 # @lc code=start
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
-        n = len(nums)
-        i = n - 2
-
+        # Find the first decreasing element from the end
+        i = len(nums) - 2
         while i >= 0 and nums[i] >= nums[i + 1]:
             i -= 1
 
         if i >= 0:
-            j = n - 1
-            while nums[j] <= nums[i]:
+            # Find the first element greater than the decreasing element
+            j = len(nums) - 1
+            while j >= 0 and nums[j] <= nums[i]:
                 j -= 1
+
+            # Swap the two elements
             nums[i], nums[j] = nums[j], nums[i]
 
-        left, right = i + 1, n - 1
+        # Reverse the array from i + 1 to the end
+        nums[i + 1:] = reversed(nums[i + 1:])
 
-        while left < right:
-            nums[left], nums[right] = nums[right], nums[left]
-            left += 1
-            right -= 1
-
-
+        return nums
 # @lc code=end
 
